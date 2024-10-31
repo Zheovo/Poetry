@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>四季终年</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('/api/placeholder/1920/1080') center/cover no-repeat fixed;
+            font-family: "STKaiti", "楷体", serif;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            margin: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3f2b96, transparent);
+            margin: 10px auto;
+        }
+
+        .poem {
+            font-size: 1.2em;
+            line-height: 2;
+            color: #34495e;
+            padding: 20px;
+            position: relative;
+        }
+
+        .stanza {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .stanza:hover {
+            transform: translateX(10px);
+        }
+
+        .stanza::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #a8c0ff 0%, #3f2b96 100%);
+            border-radius: 3px;
+        }
+
+        /* 装饰元素 */
+        .decorative {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .corner {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+
+        .corner-tl {
+            top: -20px;
+            left: -20px;
+            border-top: 2px solid #3f2b96;
+            border-left: 2px solid #3f2b96;
+        }
+
+        .corner-br {
+            bottom: -20px;
+            right: -20px;
+            border-bottom: 2px solid #3f2b96;
+            border-right: 2px solid #3f2b96;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        .seasons-indicator {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .season {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: seasonPulse 3s infinite;
+        }
+
+        @keyframes seasonPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* 季节装饰 */
+        .season-spring { background: #ffb7c5; }
+        .season-summer { background: #98fb98; }
+        .season-autumn { background: #deb887; }
+        .season-winter { background: #87ceeb; }
+
+        /* 装饰性SVG背景 */
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .poem {
+                font-size: 1em;
+            }
+
+            .corner {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        /* 诗句悬停效果 */
+        .stanza:hover::before {
+            background: linear-gradient(180deg, #ff6b6b, #3f2b96);
+            width: 4px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 角落装饰 -->
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- 季节指示器 -->
+        <div class="seasons-indicator">
+            <div class="season season-spring"></div>
+            <div class="season season-summer"></div>
+            <div class="season season-autumn"></div>
+            <div class="season season-winter"></div>
+        </div>
+
+        <!-- 标题和诗歌内容 -->
+        <h1 class="title">四季终年</h1>
+        <div class="poem">
+            <div class="stanza">
+                菊花开了又开，终年都是冬天，<br>
+                临了，厌腻了春日的潮湿，<br>
+                沙发上迎来阳光的温暖，<br>
+                炎热的午后，倦倦地小憩人间。
+            </div>
+            
+            <div class="stanza">
+                悠闲地乘着绿叶来到林里，<br>
+                将形状各异的棍木控在手掌，<br>
+                驰骋在浮动的斑点之下，<br>
+                任意地转动头颈，如鹰隼般锐利。
+            </div>
+            
+            <div class="stanza">
+                将老去的罪过收入口袋，<br>
+                饱受本分的折磨，与忧伤相爱，<br>
+                记得它曾面目可憎，如今却也凄凉难耐。
+            </div>
+            
+            <div class="stanza">
+                花儿啊，希望明年还在此与你相望，<br>
+                凝视你美丽深邃的神采，<br>
+                盼你盛开已将我的气力用光。
+            </div>
+        </div>
+
+        <!-- 漂浮装饰元素 -->
+        <div class="floating-elements">
+            <div class="floating-element" style="top: 10%; left: 10%;">🍁</div>
+            <div class="floating-element" style="top: 30%; right: 15%;">🌸</div>
+            <div class="floating-element" style="bottom: 20%; left: 20%;">🍂</div>
+            <div class="floating-element" style="bottom: 40%; right: 25%;">❄️</div>
+        </div>
+
+        <!-- SVG背景图案 -->
+        <svg class="background-pattern" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <pattern id="pattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                <circle cx="5" cy="5" r="1" fill="#3f2b96" />
+            </pattern>
+            <rect x="0" y="0" width="100" height="100" fill="url(#pattern)" />
+        </svg>
+    </div>
+</body>
+</html>
